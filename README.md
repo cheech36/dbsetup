@@ -4,6 +4,7 @@ These scripts are used to automate the process of converting flat csv files into
 
 
 Usage:
+
 	1) Create the database using postgres user assigning ownership to user:
 	   i)  sudo su postgres
 	   ii) createdb -O <username> <dbname>
@@ -20,6 +21,7 @@ Usage:
 
 
 Output:
+
 	1) Extracted csv files will be stored in "data" directory.
 	2) Some tables may fail to build, these will be listed at runtime.
 	
