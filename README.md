@@ -1,4 +1,4 @@
-Setupdb
+dbsetup
 
 These scripts are used to automate the process of converting flat csv files into a set of relational database tables.
 
