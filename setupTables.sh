@@ -3,8 +3,9 @@
 CSVDIR="data"
 DBNAME=$1
 ZIPFILE=$2
-USER="$(whoami)"
-PASSWORD="none"
+HOST="REPLACE ME"
+USER="REPLACE ME"
+PASSWORD="REPLACE ME"
 
 if [ ! -d "$CSVDIR" ]; then
     mkdir $CSVDIR
@@ -12,4 +13,4 @@ if [ ! -d "$CSVDIR" ]; then
 fi
 
 source venv/bin/activate
-./setupTables.py $CSVDIR $DBNAME $USER $PASSWORD
+./setupTables.py $CSVDIR $HOST $DBNAME $USER $PASSWORD

@@ -10,10 +10,13 @@ Usage:
 	   ii) createdb -O <username> <dbname>
 	   
 	2) To install the dependencies in a virtual enviornment run:
-	   ./venv.sh 
+	   i) ./venv.sh
+	   ii) By default venv will use existing installation. To disable
+	       remove --system-site-packages
 
 	3) ./setupTables.sh <dbname> <zipfile> 
-	   Note: If necessary change username and password
+	   i) If connecting to local database use "localhost"
+	   ii) Change username and password 
 
 	4) Optional: if you wish to delete the tables:
 	   chmod 600 autoDrop.sh

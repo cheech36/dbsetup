@@ -2,6 +2,7 @@
 import os
 import sys
 import psycopg2
+import numpy
 import pandas as pd
 
 def sanitize(dirtyName):
@@ -31,14 +32,19 @@ files_csv = [x for x in csv_cond if x.find('.csv')]
 tableNames = [x.strip('.csv') for x in files_csv]
 tableMap = dict(zip(tableNames, files_csv))
 
+host=sys.argv[2]
+dbname=sys.argv[3]
+user=sys.argv[4]
+#If the connection requires a password
 
-dbname=sys.argv[2]
-user=sys.argv[3]
-password=sys.argv[4]
+if(len(sys.argv) > 5):
+   password=sys.argv[5]
+else:
+   password=""
 
 print("dbname: " + dbname)
 
-conn = psycopg2.connect(dbname=dbname, user=user, password=password)
+conn = psycopg2.connect(host=host, dbname=dbname, user=user, password=password)
 cur = conn.cursor()
 autodrop_list = []
 
@@ -66,7 +72,7 @@ for key, val in tableMap.items():
         # Electing for option 2 
         conn.close() # End this transaction because it has a malformed query
         # Start a fresh transaction
-        conn = psycopg2.connect(dbname=dbname, user=user, password=password)
+        conn = psycopg2.connect(host=host, dbname=dbname, user=user, password=password)
         cur = conn.cursor()
 
 conn.commit()
@@ -74,8 +80,9 @@ conn.close()
 
 with open('autodrop.sh', 'w') as dropfile:
     dropfile.write("#/bin/bash\n\n")
-    dropfile.write("psql -h localhost -d %s -U %s -c '''\n" % (dbname, user))
+    dropfile.write("psql -h %s -d %s -U %s -c '''\n" % (host, dbname, user))
     for table in autodrop_list:
-        line = "DROP TABLE %s;\n" % table
+        line = "DROP TABLE %s;\n" % table 
         dropfile.write(line)
     dropfile.write("'''")
+
