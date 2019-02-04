@@ -6,8 +6,9 @@ These scripts are used to automate the process of converting flat csv files into
 Usage:
 
 	1) Create the database using postgres user assigning ownership to user:
-	   i)  sudo su postgres
+	   i)  sudo su postgres 
 	   ii) createdb -O <username> <dbname>
+	       Alternatively you can use the default 'postgres'
 	   
 	2) To install the dependencies in a virtual enviornment run:
 	   i) ./venv.sh
@@ -16,7 +17,9 @@ Usage:
 
 	3) ./setupTables.sh <dbname> <zipfile> 
 	   i) If connecting to local database use "localhost"
-	   ii) Change username and password 
+	   ii) Change username and password
+	       Note: You will need to connect with a user
+	             THAT HAS A PASSWORD
 
 	4) Optional: if you wish to delete the tables:
 	   chmod 600 autoDrop.sh
